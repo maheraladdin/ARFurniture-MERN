@@ -1,34 +1,48 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
+import { getNetworkStateAsync } from "expo-network";
+import { useState } from "react";
+import Logo from "../myComponents/lunch_page/logo";
 
-export default function Page() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
-  );
+export default function index() {
+	// router to navigate between pages
+	const router = useRouter();
+
+	// store state of connection
+	const [isConnected, setIsConnected] = useState(null);
+
+	// after 1 seconds redirect to profile page if connected to internet else redirect to wifiOff page
+	useEffect(() => {
+		// wait one second then go to next page
+		setTimeout(() => {
+			// check if connected to internet
+			(() => getNetworkStateAsync())().then((result) =>
+				setIsConnected(result.isConnected)
+			);
+
+			// if no connection go wifiOff activity
+			if (isConnected === false) {
+				router.push("/wifiOff");
+			}
+			// if connection exist go home activity
+			else if (isConnected === true) {
+				router.push("/home");
+			}
+		}, 1000);
+	}, [isConnected]);
+
+	return (
+		<View style={styles.container}>
+			<Logo />
+		</View>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
+	container: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
+	},
 });
