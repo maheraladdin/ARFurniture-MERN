@@ -23,11 +23,12 @@ function SvgComponent(props) {
 					data-name="Buy now"
 					transform="translate(188 542)"
 					fill="#f8f9fa"
-					fontSize={13}
+					fontSize={20}
 					fontFamily="Arial-BoldMT, Arial"
 					fontWeight={600}
+					
 				>
-					<TSpan x={-33.075} y={0}>
+					<TSpan x={-42.075} y={3}>
 						{"BUY NOW"}
 					</TSpan>
 				</Text>

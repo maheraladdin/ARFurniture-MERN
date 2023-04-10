@@ -23,11 +23,11 @@ function ConBtn(props) {
 					data-name="CONTINUE"
 					transform="translate(188 542)"
 					fill="#f8f9fa"
-					fontSize={10}
+					fontSize={15}
 					fontFamily="Arial-BoldMT, Arial"
 					fontWeight={700}
 				>
-					<TSpan x={-26.111} y={0}>
+					<TSpan x={-37.111} y={0}>
 						{"CONTINUE"}
 					</TSpan>
 				</Text>

@@ -8,7 +8,7 @@ export default function Products() {
 			<View style={{ alignItems: "flex-end", margin: 10 }}>
 				<RedHeart />
 			</View>
-			<Text style={{ marginTop: 130, color: "white", padding: 10 }}>
+			<Text style={{ marginTop: 130, color: "white", padding: 10,fontWeight: "bold" }}>
 				Awesome chair
 			</Text>
 			<View
@@ -19,7 +19,7 @@ export default function Products() {
 					gap: 50,
 				}}
 			>
-				<Text style={{ color: "white" }}>50$</Text>
+				<Text style={{ color: "white",fontSize: 20, fontWeight: "bold" }}>50$</Text>
 				<AddCart />
 			</View>
 		</View>

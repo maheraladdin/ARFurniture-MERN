@@ -5,13 +5,11 @@ import Card from "../myComponents/payment/card_light";
 import Paypal from "../myComponents/payment/paypal";
 import { Link } from "expo-router";
 
-export default function shoppingCart() {
+export default function paypal() {
 	return (
 		<View style={{ marginTop: 40 }}>
-			<View style={styles.shopping}>
-				<Link href={"./cart"}>
-					<Back />
-				</Link>
+			<View style={styles.logo}>
+				<Back />
 				<Text style={{ fontSize: 20 }}>Shopping cart</Text>
 			</View>
 
@@ -54,14 +52,13 @@ export default function shoppingCart() {
 						style={{
 							width: 20,
 							height: 20,
+							backgroundColor: "black",
 							borderRadius: 50,
 							borderColor: "#212529",
 							borderWidth: 2,
 						}}
 					></View>
-					<Link href={"./paypal"}>
-						<Paypal />
-					</Link>
+					<Paypal />
 					<Text style={{ fontWeight: "bold" }}>Paypal</Text>
 				</View>
 			</View>
@@ -82,75 +79,12 @@ export default function shoppingCart() {
 							borderWidth: 2,
 							paddingLeft: 30,
 						}}
-						placeholder="Name on card"
-					></TextInput>
-				</View>
-
-				<View
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-						marginTop: 20,
-					}}
-				>
-					<TextInput
-						style={{
-							width: 300,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 30,
-						}}
-						placeholder="card Number"
-					></TextInput>
-				</View>
-
-				<View
-					style={{
-						justifyContent: "center",
-						flexDirection: "row",
-						marginTop: 20,
-						gap: 13,
-					}}
-				>
-					<TextInput
-						style={{
-							width: 90,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 15,
-						}}
-						placeholder="YYY"
-					></TextInput>
-					<TextInput
-						style={{
-							width: 90,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 15,
-						}}
-						placeholder="MM"
-					></TextInput>
-					<TextInput
-						style={{
-							width: 90,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 15,
-						}}
-						placeholder="CVC"
+						placeholder="Example@gmail.com"
 					></TextInput>
 				</View>
 			</View>
 
-			<View style={{ marginTop: 100 }}>
+			<View style={{ marginTop: 40 }}>
 				<View style={{ alignItems: "center", marginTop: 15 }}>
 					<View
 						style={{
@@ -187,10 +121,17 @@ export default function shoppingCart() {
 }
 
 const styles = StyleSheet.create({
-	shopping: {
+	logo: {
 		margin: 20,
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 10,
+	},
+	product: {
+		backgroundColor: "#518379",
+		width: "45%",
+		height: 250,
+		margin: 10,
+		borderRadius: 20,
 	},
 });

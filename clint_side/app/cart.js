@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import LogTop from "../myComponents/home/logo_top";
-import RedHeart from "../myComponents/home/red_heart";
 import Homee from "../myComponents/navBar/home_icon";
 import WhiteHeart from "../myComponents/navBar/white_heart";
 import Shopping from "../myComponents/navBar/shopping_cart_filled";
@@ -20,10 +19,27 @@ export default function Carts() {
 
 				<View style={{ flexDirection: "row" }}>
 					<View style={styles.product}>
-						<View style={{ alignItems: "flex-end", margin: 10 }}>
-							<RedHeart />
+						<View style={{ alignItems: "flex-end" }}>
+							<View
+								style={{
+									margin: 10,
+									backgroundColor: "orange",
+									width: 30,
+									height: 30,
+									borderRadius: 50,
+									borderColor: "#f8f9fa",
+									borderWidth: 3,
+								}}
+							></View>
 						</View>
-						<Text style={{ marginTop: 130, color: "white", padding: 10 }}>
+						<Text
+							style={{
+								marginTop: 130,
+								color: "white",
+								padding: 10,
+								fontWeight: "bold",
+							}}
+						>
 							Awesome chair
 						</Text>
 						<View
@@ -31,20 +47,46 @@ export default function Carts() {
 								flexDirection: "row",
 								justifyContent: "space-evenly",
 								alignItems: "center",
-								gap: 30,
+								gap: 10,
 							}}
 						>
-							<Text style={{ color: "white" }}>50$</Text>
+							<Text
+								style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
+							>
+								50$
+							</Text>
 							<Minus />
+							<Text
+								style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
+							>
+								1
+							</Text>
 							<Add />
 						</View>
 					</View>
 
 					<View style={styles.product}>
-						<View style={{ alignItems: "flex-end", margin: 10 }}>
-							<RedHeart />
+						<View style={{ alignItems: "flex-end" }}>
+							<View
+								style={{
+									margin: 10,
+									backgroundColor: "orange",
+									width: 30,
+									height: 30,
+									borderRadius: 50,
+									borderColor: "#f8f9fa",
+									borderWidth: 3,
+								}}
+							></View>
 						</View>
-						<Text style={{ marginTop: 130, color: "white", padding: 10 }}>
+						<Text
+							style={{
+								marginTop: 130,
+								color: "white",
+								padding: 10,
+								fontWeight: "bold",
+							}}
+						>
 							Awesome chair
 						</Text>
 						<View
@@ -52,15 +94,25 @@ export default function Carts() {
 								flexDirection: "row",
 								justifyContent: "space-evenly",
 								alignItems: "center",
-								gap: 30,
+								gap: 10,
 							}}
 						>
-							<Text style={{ color: "white" }}>50$</Text>
+							<Text
+								style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
+							>
+								50$
+							</Text>
 							<Minus />
+							<Text
+								style={{ color: "white", fontSize: 20, fontWeight: "bold" }}
+							>
+								1
+							</Text>
 							<Add />
 						</View>
 					</View>
 				</View>
+
 				<View style={{ alignItems: "center", marginTop: 15 }}>
 					<View
 						style={{
@@ -71,11 +123,19 @@ export default function Carts() {
 							height: 48,
 							width: 295,
 							borderRadius: 30,
-							gap: 150,
+							gap: 100,
 						}}
 					>
-						<Text style={{ color: "#f9f8fa" }}>TOTAL</Text>
-						<Text style={{ color: "#f9f8fa" }}>100$</Text>
+						<Text
+							style={{ color: "#f9f8fa", fontSize: 20, fontWeight: "bold" }}
+						>
+							TOTAL
+						</Text>
+						<Text
+							style={{ color: "#f9f8fa", fontSize: 20, fontWeight: "bold" }}
+						>
+							100$
+						</Text>
 					</View>
 				</View>
 				<View style={{ alignItems: "center", marginTop: 20 }}>
@@ -95,10 +155,16 @@ export default function Carts() {
 							borderRadius: 20,
 						}}
 					>
-						<Homee />
-						<WhiteHeart />
+						<Link href={"./Home"}>
+							<Homee />
+						</Link>
+						<Link href={"./likes"}>
+							<WhiteHeart />
+						</Link>
 						<Shopping />
-						<Avatar />
+						<Link href={"./profile"}>
+							<Avatar />
+						</Link>
 					</View>
 				</View>
 			</ScrollView>
@@ -109,10 +175,6 @@ export default function Carts() {
 const styles = StyleSheet.create({
 	logo: {
 		margin: 20,
-	},
-	container: {
-		justifyContent: "space-evenly",
-		flexDirection: "row",
 	},
 	product: {
 		backgroundColor: "#518379",

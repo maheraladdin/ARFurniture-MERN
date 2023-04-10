@@ -27,7 +27,7 @@ export default function index() {
 			}
 			// if connection exist go home activity
 			else if (isConnected === true) {
-				router.push("/home");
+				router.push("/page1");
 			}
 		}, 1000);
 	}, [isConnected]);

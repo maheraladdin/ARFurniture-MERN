@@ -22,11 +22,11 @@ function SvgComponent(props) {
 				<Text
 					transform="translate(188 542)"
 					fill="#f8f9fa"
-					fontSize={12}
+					fontSize={15}
 					fontFamily="Arial-BoldMT, Arial"
 					fontWeight={600}
 				>
-					<TSpan x={-23.33} y={0}>
+					<TSpan x={-33.33} y={0}>
 						{"CONFIRM"}
 					</TSpan>
 				</Text>

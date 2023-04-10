@@ -1,88 +1,134 @@
-import { StyleSheet, View, Text, ScrollView } from "react-native";
-import All from "../myComponents/filter/active/all";
-import Chair from "../myComponents/filter/light_mode/chair";
-import Cupboard from "../myComponents/filter/light_mode/cupboard";
-import Lamp from "../myComponents/filter/light_mode/lamp";
-import LogTop from "../myComponents/home/logo_top";
-import Search from "../myComponents/filter/light_mode/search";
-import Homee from "../myComponents/navBar/home_icon_filled";
+import { StyleSheet, View, Text, TextInput } from "react-native";
+import Homee from "../myComponents/navBar/home_icon";
 import WhiteHeart from "../myComponents/navBar/white_heart";
 import Shopping from "../myComponents/navBar/shopping_cart";
-import Avatar from "../myComponents/navBar/avatar";
+import Avatar from "../myComponents/navBar/avatar_filled";
+import ProfileAvatar from "../myComponents/profile/profile_avatar_photo";
+import EditButton from "../myComponents/buttons/edit_button";
+import TurnTo from "../myComponents/buttons/turn_to_dark_mode";
+import Phone from "../myComponents/profile/light_mode/phone_icon";
+import Privacy from "../myComponents/profile/light_mode/privacy_policy_icon";
+import Term from "../myComponents/profile/light_mode/Terms_and_Conditions";
+import Logout from "../myComponents/profile/light_mode/logout";
 import { Link } from "expo-router";
-import Product from "../app/products";
 
-export default function Home() {
+export default function profile() {
 	return (
-		<ScrollView>
-			<View style={styles.logo}>
-				<LogTop />
-				<Search />
+		<>
+			<View style={{ alignItems: "center", marginTop: 80 }}>
+				<ProfileAvatar />
 			</View>
-			<View style={styles.container}>
-				<All />
-				<Chair />
-				<Cupboard />
-				<Lamp />
-			</View>
-
-			<View style={{ flexDirection: "row" }}>
-				<Product />
-				<Product />
-			</View>
-
-			<View style={{ flexDirection: "row" }}>
-				<Product />
-				<Product />
-			</View>
-
-			<View style={{ flexDirection: "row" }}>
-				<Product />
-				<Product />
-			</View>
-
-			<View style={{ flexDirection: "row" }}>
-				<Product />
-				<Product />
-			</View>
-
-			<View style={{ flexDirection: "row" }}>
-				<Product />
-				<Product />
+			<View style={{ alignItems: "center", marginTop: -25 }}>
+				<Link href={"./editProfile"}>
+					<EditButton />
+				</Link>
+				<Text style={{ fontSize: 30, fontWeight: "bold", margin: 10 }}>
+					Customer Name
+				</Text>
+				<TurnTo />
 			</View>
 
 			<View
 				style={{
-					backgroundColor: "#518379",
-					flexDirection: "row",
-					justifyContent: "space-evenly",
 					alignItems: "center",
-					height: 50,
-					margin: 10,
-					borderRadius: 20,
+					justifyContent: "center",
+					marginTop: 20,
 				}}
 			>
-				<Homee />
-				<Link href={"/likes"}>
-					<WhiteHeart />
-				</Link>
-				<Link href={"./cart"}>
-					<Shopping />
-				</Link>
-				<Avatar />
+				<View
+					style={{
+						flexDirection: "row",
+						gap: 10,
+						width: 270,
+						padding: 10,
+						borderColor: "#212529",
+						borderBottomWidth: 2,
+						marginBottom: 18,
+					}}
+				>
+					<Link href={"./contactUs"}>
+						<Phone />
+					</Link>
+					<Text style={{ fontWeight: "bold" }}>Contact us</Text>
+				</View>
+
+				<View
+					style={{
+						flexDirection: "row",
+						gap: 10,
+						width: 270,
+						padding: 10,
+						borderColor: "#212529",
+						borderBottomWidth: 2,
+						marginBottom: 18,
+					}}
+				>
+					<Link href={"./privacyPolicy"}>
+						<Privacy />
+					</Link>
+					<Text style={{ fontWeight: "bold" }}>Privacy policy</Text>
+				</View>
+
+				<View
+					style={{
+						flexDirection: "row",
+						gap: 10,
+						width: 270,
+						padding: 10,
+						borderColor: "#212529",
+						borderBottomWidth: 2,
+						marginBottom: 18,
+					}}
+				>
+					<Link href={"./termsAndConditions"}>
+						<Term />
+					</Link>
+					<Text style={{ fontWeight: "bold" }}>Terms and Conditions</Text>
+				</View>
+
+				<View
+					style={{
+						flexDirection: "row",
+						gap: 10,
+						width: 270,
+						padding: 10,
+						borderColor: "#212529",
+						borderBottomWidth: 2,
+						marginBottom: 18,
+					}}
+				>
+					<Link href={"./logOut"}>
+						<Logout />
+					</Link>
+					<Text style={{ fontWeight: "bold" }}>logout</Text>
+				</View>
 			</View>
-		</ScrollView>
+
+			<View style={{ flex: 1, justifyContent: "flex-end" }}>
+				<View
+					style={{
+						backgroundColor: "#518379",
+						flexDirection: "row",
+						justifyContent: "space-evenly",
+						alignItems: "center",
+						height: 50,
+						margin: 10,
+						borderRadius: 20,
+					}}
+				>
+					<Link href={"./Home"}>
+						<Homee />
+					</Link>
+					<Link href={"./likes"}>
+						<WhiteHeart />
+					</Link>
+					<Link href={"./cart"}>
+						<Shopping />
+					</Link>
+					<Avatar />
+				</View>
+			</View>
+		</>
 	);
 }
 
-const styles = StyleSheet.create({
-	logo: {
-		margin: 20,
-		flexDirection: "row",
-		justifyContent: "space-between",
-	},
-	container: {
-		justifyContent: "space-evenly",
-		flexDirection: "row",
-	},
-});
