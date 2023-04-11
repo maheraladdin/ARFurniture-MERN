@@ -10,7 +10,7 @@ import WhiteHeart from "../myComponents/navBar/white_heart";
 import Shopping from "../myComponents/navBar/shopping_cart";
 import Avatar from "../myComponents/navBar/avatar";
 import { Link } from "expo-router";
-import Product from "./products";
+import Product from "../myComponents/products";
 
 export default function Home() {
 	return (

@@ -12,7 +12,7 @@ export default function page1() {
 				<Ar />
 			</View>
 			<View style={styles.conBtn}>
-				<Link href={"/Home"}>
+				<Link href={"/home"}>
 					<ConBtn />
 				</Link>
 			</View>

@@ -25,7 +25,7 @@ export default function index() {
 			if (isConnected === false) {
 				router.push("/wifiOff");
 			}
-			// if connection exist go home activity
+			// if connection exist go page1 activity
 			else if (isConnected === true) {
 				router.push("/page1");
 			}
