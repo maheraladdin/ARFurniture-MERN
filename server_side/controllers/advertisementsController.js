@@ -1,4 +1,4 @@
-const Advertisements = require("../models/AdvertisementsModel");
+const Advertisements = require("../models/advertisementsModel");
 
 const asyncFunc = require("../middlewares/asyncFunc");
 

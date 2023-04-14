@@ -9,10 +9,8 @@ const errorMW = require("./middlewares/errorMW");
 
 // require Routes
 const productsRouter = require("./routes/products");
-const userRouter = require("./routes/User");
-const advertisementsRouter = require("./routes/Advertisements");
-const authRouter = require("./routes/Auth");
-
+const userRouter = require("./routes/user");
+const advertisementsRouter = require("./routes/advertisements");
 
 // port
 const port = process.env.PORT || 3000;
@@ -45,16 +43,14 @@ mongoose.connect("mongodb://localhost:27017/ARFurniture", {
 app.use(express.json())
 app.use(helmet());
 
+// use routes
+
+app.use("/api/products",productsRouter);
+app.use("/api/Users",userRouter);
+app.use("/api/Advertisements",advertisementsRouter);
 
 // use error handling middleware
 app.use(errorMW);
-
-// use routes
-
-app.use("/api/Products",productsRouter);
-app.use("/api/Users",userRouter);
-app.use("/api/Advertisements",advertisementsRouter);
-app.use("/api/Auth",authRouter);
 
 
 // server listen
