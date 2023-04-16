@@ -16,7 +16,7 @@ module.exports.signUp = asyncFunc(async (req,res) => {
         name: req.body.name,
         email: req.body.email,
         password: hash,
-        image: req.body.image,
+        image: "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
         wishlist: [],
         cart: [],
     });
