@@ -6,15 +6,15 @@ import { useState } from "react";
 import Logo from "../myComponents/lunch_page/logo";
 
 export default function index() {
-	// router to navigate between pages
+	// router to navigate between activities
 	const router = useRouter();
 
 	// store state of connection
 	const [isConnected, setIsConnected] = useState(null);
 
-	// after 1 seconds redirect to profile page if connected to internet else redirect to wifiOff page
+	// after 1 seconds redirect to profile activity if connected to internet else redirect to wifiOff activity
 	useEffect(() => {
-		// wait one second then go to next page
+		// wait one second then go to next activity
 		setTimeout(() => {
 			// check if connected to internet
 			(() => getNetworkStateAsync())().then((result) =>
@@ -25,10 +25,12 @@ export default function index() {
 			if (isConnected === false) {
 				router.push("/wifiOff");
 			}
-			// if connection exist go page1 activity
+
+			// if connection exist go advertisement activity
 			else if (isConnected === true) {
-				router.push("/page1");
+				router.push("/advertisement");
 			}
+
 		}, 1000);
 	}, [isConnected]);
 

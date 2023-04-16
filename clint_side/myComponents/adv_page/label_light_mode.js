@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { G, Text, TSpan, Path } from "react-native-svg";
 
-function Light(props) {
+function Slogan(props) {
 	return (
 		<Svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -54,4 +54,4 @@ function Light(props) {
 	);
 }
 
-export default Light;
+export default Slogan;

@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const helmet = require("helmet");
 const mongoose = require("mongoose");
-
+const corsMW = require("./middlewares/corsMW");
 // last module to handle errors
 const errorMW = require("./middlewares/errorMW");
 
@@ -39,9 +39,12 @@ mongoose.connect("mongodb://localhost:27017/ARFurniture", {
 });
 
 
-// use middlewares
+// use middlewares core
 app.use(express.json())
+
+// use middlewares third party
 app.use(helmet());
+app.use(corsMW);
 
 // use routes
 
@@ -49,7 +52,7 @@ app.use("/api/products",productsRouter);
 app.use("/api/Users",userRouter);
 app.use("/api/Advertisements",advertisementsRouter);
 
-// use error handling middleware
+// use custom error middleware
 app.use(errorMW);
 
 
