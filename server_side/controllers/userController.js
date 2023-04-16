@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 // sign up
 module.exports.signUp = asyncFunc(async (req,res) => {
+
     // check if the user is already registered
     const isRegistered = await User.findOne({email: req.body.email}).exec();
     if (isRegistered)
@@ -12,7 +13,7 @@ module.exports.signUp = asyncFunc(async (req,res) => {
     // if not registered then register the user
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
-    const user = new User({
+    const user = await new User({
         name: req.body.name,
         email: req.body.email,
         password: hash,
@@ -20,6 +21,9 @@ module.exports.signUp = asyncFunc(async (req,res) => {
         wishlist: [],
         cart: [],
     });
+
+    console.log(user);
+
     await user.save();
 
     // if valid then generate token
@@ -68,7 +72,7 @@ module.exports.getWishlist = asyncFunc(async (req,res) => {
 // add to wishlist by user id
 module.exports.addToWishlist = asyncFunc(async (req,res) => {
     const user = await User.findById(req.body.id);
-    user.wishlist.push(req.body.id);
+    user.wishlist.push(req.body.productId);
     await user.save();
     res.status(200).json({wishlist: user.wishlist});
 });
@@ -76,7 +80,7 @@ module.exports.addToWishlist = asyncFunc(async (req,res) => {
 // remove from wishlist by user id
 module.exports.removeFromWishlist = asyncFunc(async (req,res) => {
     const user = await User.findById(req.body.id);
-    user.wishlist = user.wishlist.filter((id) => id !== req.body.id);
+    user.wishlist = user.wishlist.filter((id) => id !== req.body.productId);
     await user.save();
     res.status(200).json({wishlist: user.wishlist});
 });
@@ -90,7 +94,7 @@ module.exports.getCart = asyncFunc(async (req,res) => {
 // add to cart by user id
 module.exports.addToCart = asyncFunc(async (req,res) => {
     const user = await User.findById(req.body.id);
-    user.cart.push(req.body.id);
+    user.cart.push(req.body.productId);
     await user.save();
     res.status(200).json({cart: user.cart});
 });
@@ -98,7 +102,7 @@ module.exports.addToCart = asyncFunc(async (req,res) => {
 // remove from cart by user id
 module.exports.removeFromCart = asyncFunc(async (req,res) => {
     const user = await User.findById(req.body.id);
-    user.cart = user.cart.filter((id) => id !== req.body.id);
+    user.cart = user.cart.filter((id) => id !== req.body.productId);
     await user.save();
     res.status(200).json({cart: user.cart});
 });

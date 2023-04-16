@@ -38,30 +38,30 @@ router.put("/:id",checkTokenMW, updateUser);
 // @access Private
 router.get("/wishlist/:id",checkTokenMW, getWishlist);
 
-// @route PUT api/users/wishlist
+// @route POST api/users/wishlist
 // @desc Add to wishlist by user id
 // @access Private
-router.put("/wishlist",checkTokenMW, addToWishlist);
+router.post("/wishlist",checkTokenMW, addToWishlist);
 
-// @route PUT api/users/wishlist
+// @route DELETE api/users/wishlist
 // @desc Remove from wishlist by user id
 // @access Private
-router.put("/wishlist",checkTokenMW, removeFromWishlist);
+router.delete("/wishlist",checkTokenMW, removeFromWishlist);
 
 // @route GET api/users/cart/:id
 // @desc Get cart by user id
 // @access Private
 router.get("/cart/:id",checkTokenMW, getCart);
 
-// @route PUT api/users/cart
+// @route POST api/users/cart
 // @desc Add to cart by user id
 // @access Private
-router.put("/cart",checkTokenMW, addToCart);
+router.post("/cart",checkTokenMW, addToCart);
 
-// @route PUT api/users/cart
+// @route DELETE api/users/cart
 // @desc Remove from cart by user id
 // @access Private
-router.put("/cart",checkTokenMW, removeFromCart);
+router.delete("/cart",checkTokenMW, removeFromCart);
 
 
 

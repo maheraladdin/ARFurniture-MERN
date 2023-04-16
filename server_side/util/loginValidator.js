@@ -5,12 +5,10 @@ const loginSchema = {
     type: "object",
     properties: {
         email: {
-            type: "string",
-            pattern: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+            type: "string"
         },
         password: {
-            type: "string",
-            pattern: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\\\S+$).{8, 20}$"
+            type: "string"
         }
     },
     required: ["email", "password"]
