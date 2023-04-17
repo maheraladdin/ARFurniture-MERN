@@ -1,4 +1,4 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView,FlatList } from "react-native";
 import All from "../myComponents/filter/active/all";
 import Chair from "../myComponents/filter/light_mode/chair";
 import Cupboard from "../myComponents/filter/light_mode/cupboard";
@@ -10,16 +10,22 @@ import WhiteHeart from "../myComponents/navBar/white_heart";
 import Shopping from "../myComponents/navBar/shopping_cart";
 import Avatar from "../myComponents/navBar/avatar";
 import { Link } from "expo-router";
-import Product from "../myComponents/products";
+import Product from "../myComponents/home/products";
 
 export default function Home() {
+
+	const DATA = Array(10).fill(0);
+
 	return (
 		<>
 			<ScrollView>
+				{/* header */}
 				<View style={styles.logo}>
 					<LogTop />
 					<Search />
 				</View>
+
+				{/* filter */}
 				<View style={styles.container}>
 					<All />
 					<Chair />
@@ -27,30 +33,13 @@ export default function Home() {
 					<Lamp />
 				</View>
 
-				<View style={{ flexDirection: "row" }}>
-					<Product />
-					<Product />
-				</View>
+				{/* products */}
+				<FlatList
+					data={DATA}
+					renderItem={({ item }) => <Product />}
+					numColumns={2}
+				/>
 
-				<View style={{ flexDirection: "row" }}>
-					<Product />
-					<Product />
-				</View>
-
-				<View style={{ flexDirection: "row" }}>
-					<Product />
-					<Product />
-				</View>
-
-				<View style={{ flexDirection: "row" }}>
-					<Product />
-					<Product />
-				</View>
-
-				<View style={{ flexDirection: "row" }}>
-					<Product />
-					<Product />
-				</View>
 			</ScrollView>
 
 			<View
@@ -64,6 +53,7 @@ export default function Home() {
 					borderRadius: 20,
 				}}
 			>
+				{/* navigator */}
 				<Homee />
 				<Link href={"./likes"}>
 					<WhiteHeart />

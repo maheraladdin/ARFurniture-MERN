@@ -1,44 +1,53 @@
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
-import RedHeart from "./home/red_heart";
-import RedHeartFilled from "./home/red_heart_filled";
-import AddCart from "./buttons/add_to_cart_button_home_page";
+import {StyleSheet, View, Text, TouchableOpacity,ImageBackground} from "react-native";
+import RedHeart from "./red_heart";
+import RedHeartFilled from "./red_heart_filled";
+import AddCart from "../buttons/add_to_cart_button_home_page";
 import { useState } from "react";
 
-export default function Products() {
+export default function Products({heartState,title,price,image}) {
 
-	const [filled, setFilled] = useState(false);
+	const [filled, setFilled] = useState(heartState);
 
 	return (
-		<View style={styles.product}>
+		<ImageBackground
+			source={{
+			uri: image ?? `https://via.placeholder.com/250x250`
+		}}
+			resizeMode="cover"
+			style={styles.product}
+		>
+
+			{/* Heart */}
 			<View style={styles.redHeart}>
 				<TouchableOpacity onPress={() => setFilled(!filled)}>
 					{filled ? <RedHeartFilled/> : <RedHeart/>}
 				</TouchableOpacity>
 			</View>
+
+			{/* Product Title and Price */}
 			<View>
 				<Text style={styles.productTitle}>
-					Awesome chair
+					{!title ? "Product Title" : title}
 				</Text>
 				<View style={styles.cartContainer}>
-					<Text style={styles.productPrice}>50$</Text>
+					<Text style={styles.productPrice}>{!price ? 50 : price}$</Text>
 					<AddCart />
 				</View>
 			</View>
-		</View>
+
+		</ImageBackground>
 	);
 }
 
 const styles = StyleSheet.create({
 	product: {
-		backgroundColor: "#518379",
-		width: "45%",
 		height: 250,
 		margin: 10,
 		borderRadius: 10,
 		padding: 10,
 		flex: 1,
-		flexDirection: "column",
 		justifyContent: "space-between",
+		overflow: "hidden",
 	},
 	redHeart: {
 		alignItems: "flex-end",
@@ -46,6 +55,7 @@ const styles = StyleSheet.create({
 	cartContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
+		alignItems: "center",
 	},
 	productTitle: {
 		fontWeight: "bold",
