@@ -11,7 +11,7 @@ export default function Products({heartState,title,price,image}) {
 	return (
 		<ImageBackground
 			source={{
-			uri: image ?? `https://via.placeholder.com/250x250`
+			uri: !image ? `https://via.placeholder.com/250x250` : image
 		}}
 			resizeMode="cover"
 			style={styles.product}
