@@ -9,7 +9,7 @@ import Shopping from "../myComponents/navBar/shopping_cart";
 import Avatar from "../myComponents/navBar/avatar";
 import { Link } from "expo-router";
 
-export default function Likes() {
+export default function WishList() {
 	return (
 		<View style={{ marginTop: 40 }}>
 			<ScrollView>
