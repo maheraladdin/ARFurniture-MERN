@@ -1,8 +1,8 @@
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { View, Text } from "react-native";
 import Homee from "../myComponents/navBar/home_icon";
 import WhiteHeart from "../myComponents/navBar/white_heart";
 import Shopping from "../myComponents/navBar/shopping_cart";
-import Avatar from "../myComponents/navBar/avatar_filled";
+import Avatar from "../myComponents/navBar/avatar";
 import ProfileAvatar from "../myComponents/profile/profile_avatar_photo";
 import EditButton from "../myComponents/buttons/edit_button";
 import TurnTo from "../myComponents/buttons/turn_to_dark_mode";
