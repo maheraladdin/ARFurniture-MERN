@@ -19,6 +19,7 @@ import {useRouter} from "expo-router";
 import LoginUser from "../logic/Queries/signInUser";
 import {passwordValidator} from "../logic/validator/passwordValidator";
 import {emailValidator} from "../logic/validator/emailValidator";
+import {isLogin} from "../data/isLogin";
 
 export default function login() {
 
@@ -34,6 +35,12 @@ export default function login() {
 	// password invalid
 	const [passwordInvalid, setPasswordInvalid] = useState(true);
 
+	// activity
+	const [activity, setActivity] = useState(null);
+
+	// borderColorValidation
+	const [borderColorValidation, setBorderColorValidation] = useState("#CCC");
+
 	const router = useRouter();
 
 	// login
@@ -47,8 +54,10 @@ export default function login() {
 		if(passwordValidator(password))
 			setPasswordInvalid(false);
 
-		if(emailInvalid && passwordInvalid)
+		if(emailInvalid && passwordInvalid) {
 			LoginUser(email, password);
+			isLogin.state ? setActivity("home") : setBorderColorValidation("red");
+		}
 	}
 
 	return (
@@ -66,13 +75,19 @@ export default function login() {
 					behavior={"padding"}
 				>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: borderColorValidation
+						}}
 						placeholder={"email"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setEmail}
 					/>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: borderColorValidation
+						}}
 						placeholder={"password"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setPassword}
@@ -84,7 +99,7 @@ export default function login() {
 					<TouchableOpacity>
 						<LoginGoogle />
 					</TouchableOpacity>
-					<ConBtn callback={login} activity={"home"}/>
+					<ConBtn callback={login} activity={activity}/>
 					<TouchableOpacity onPress={() => router.push("signUp")}>
 						<SignUp />
 					</TouchableOpacity>
