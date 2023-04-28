@@ -1,7 +1,7 @@
 import PagerView from "react-native-pager-view";
 import {Dimensions,StyleSheet, Image, TouchableOpacity, View} from "react-native";
 import {useEffect, useRef, useState} from "react";
-
+import getAllAdvertisements from "../../logic/Queries/advertisements/getAllAdvertisements";
 
 
 export default function AdvertisementsViewPager() {
@@ -21,14 +21,9 @@ export default function AdvertisementsViewPager() {
         pagerRef.current.setPage(pageNumber);
     };
 
-    useEffect(() => {
-        // fetch advertisement from server
-        fetch("http://192.168.1.18:3000/api/advertisements")
-            .then((response) => response.json())
-            .then((data) => {
-                setAdvertisements(data);
-            })
-            .catch((error) => console.log("error", error));
+
+    useEffect(async () => {
+        getAllAdvertisements(setAdvertisements);
     },[]);
 
     return (
@@ -45,7 +40,6 @@ export default function AdvertisementsViewPager() {
             {
 
                 advertisements.map((image) => {
-                    console.log(image.imageURI)
                     return (
                         <View style={styles.page} key={image._id}>
                             <Image
@@ -67,7 +61,7 @@ export default function AdvertisementsViewPager() {
                             <View style={{
                                 width: 30,
                                 height: 30,
-                                borderRadius: "50%",
+                                borderRadius: 15,
                                 backgroundColor: index === pageNumber ? "#518379" : "#E0E0E0"
                             }}>
                             </View>

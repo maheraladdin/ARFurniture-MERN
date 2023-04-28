@@ -8,17 +8,24 @@ const {
     getProductsByCategory
 } = require("../controllers/productsController");
 
-// request all products
+// @route   GET api/products
+// @desc    Get all products
+// @access  Public
 router.get("/",getAllProducts);
 
-// request a product by id
-// passing data from clint to server via url parameters
+// @route   GET api/products/:id
+// @desc    Get product by id
+// @access  Public
 router.get("/:id",getProductById);
 
-// request products by search string
+// @route   GET api/products/search/:searchString
+// @desc    Get products by search string
+// @access  Public
 router.get("/search/:searchString",getProductsBySearchString);
 
-// request products by category
+// @route   GET api/products/category/:category
+// @desc    Get products by category
+// @access  Public
 router.get("/category/:category",getProductsByCategory);
 
 

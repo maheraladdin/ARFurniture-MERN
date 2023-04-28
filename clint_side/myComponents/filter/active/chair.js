@@ -1,6 +1,6 @@
 import Svg, { G, Rect, Path } from "react-native-svg"
 
-function Chair(props) {
+function ChairActive(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -165,4 +165,4 @@ function Chair(props) {
   )
 }
 
-export default Chair ;
+export default ChairActive ;

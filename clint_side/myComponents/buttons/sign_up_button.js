@@ -23,7 +23,7 @@ function SvgComponent(props) {
 					data-name="Sign up"
 					transform="translate(188 542)"
 					fill="#f8f9fa"
-					fontSize={10}
+					fontSize={15}
 					fontFamily="Arial-BoldMT, Arial"
 					fontWeight={700}
 				>

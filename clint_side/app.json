@@ -5,6 +5,11 @@
       "bundler": "metro"
     },
     "name": "clint_side",
-    "slug": "clint_side"
+    "slug": "clint_side",
+    "ios": {
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    }
   }
 }

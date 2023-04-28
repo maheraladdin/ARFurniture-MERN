@@ -1,134 +1,115 @@
-import { View, Text } from "react-native";
-import Homee from "../myComponents/navBar/home_icon";
-import WhiteHeart from "../myComponents/navBar/white_heart";
-import Shopping from "../myComponents/navBar/shopping_cart";
-import Avatar from "../myComponents/navBar/avatar";
-import ProfileAvatar from "../myComponents/profile/profile_avatar_photo";
+import Navigator from "../myComponents/home/navigator";
+import {useState} from "react";
+import {View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Dimensions} from "react-native";
 import EditButton from "../myComponents/buttons/edit_button";
-import TurnTo from "../myComponents/buttons/turn_to_dark_mode";
-import Phone from "../myComponents/profile/light_mode/phone_icon";
-import Privacy from "../myComponents/profile/light_mode/privacy_policy_icon";
-import Term from "../myComponents/profile/light_mode/Terms_and_Conditions";
+import TurnToDarkMode from "../myComponents/buttons/turn_to_dark_mode";
+import PhoneIcon from "../myComponents/profile/light_mode/phone_icon";
+import PrivacyPolicyIcon from "../myComponents/profile/light_mode/privacy_policy_icon";
+import TermsAndConditions from "../myComponents/profile/light_mode/Terms_and_Conditions";
 import Logout from "../myComponents/profile/light_mode/logout";
-import { Link } from "expo-router";
+import {useRouter} from "expo-router";
+import { signOutUser } from "../logic/Queries/signOutUser";
+import { isLogin } from "../data/isLogin";
 
 export default function profile() {
+	const [navigate, setNavigate] = useState("profile");
+	const [profileData, setProfileData] = useState(isLogin.userData);
+
+	const router = useRouter();
+
+	const generateButton = (icon, text,activity,callback) => {
+		const buttonHandler = async () => {
+			callback ? await callback() : null;
+			router.push(activity);
+		}
+		return (
+			<TouchableOpacity onPress={activity ? buttonHandler : null} style={styles.ButtonsNavigators}>
+				{icon}
+				<Text>{text}</Text>
+			</TouchableOpacity>
+		)
+	}
+
+	const Buttons = [
+		{
+			element: generateButton(<PhoneIcon/>, "Contact US", "contactUs"),
+		},
+		{
+			element: generateButton(<PrivacyPolicyIcon />, "Privacy Policy", "privacyPolicy"),
+		},
+		{
+			element: generateButton(<TermsAndConditions />, "Terms & Conditions", "termsAndConditions"),
+		},
+		{
+			element: generateButton(<Logout />, "logout", "home",signOutUser),
+		}
+		];
+
 	return (
 		<>
-			<View style={{ alignItems: "center", marginTop: 80 }}>
-				<ProfileAvatar />
-			</View>
-			<View style={{ alignItems: "center", marginTop: -25 }}>
-				<Link href={"./editProfile"}>
+		<ScrollView>
+			<View style={styles.container}>
+				<Image
+					source={{uri: profileData.image || "https://via.placeholder.com/200x200"}}
+					style={styles.image}
+				/>
+				<TouchableOpacity onPress={() => router.push("./editProfile")} style={styles.editButton}>
 					<EditButton />
-				</Link>
-				<Text style={{ fontSize: 30, fontWeight: "bold", margin: 10 }}>
-					Customer Name
+				</TouchableOpacity>
+				<Text style={styles.customerName}>
+					{profileData.username || "Customer Name"}
 				</Text>
-				<TurnTo />
+				<TouchableOpacity style={styles.modeIcon}>
+					<TurnToDarkMode />
+				</TouchableOpacity>
+
+				{
+					Buttons.map(item => item.element)
+				}
 			</View>
-
-			<View
-				style={{
-					alignItems: "center",
-					justifyContent: "center",
-					marginTop: 20,
-				}}
-			>
-				<View
-					style={{
-						flexDirection: "row",
-						gap: 10,
-						width: 270,
-						padding: 10,
-						borderColor: "#212529",
-						borderBottomWidth: 2,
-						marginBottom: 18,
-					}}
-				>
-					<Link href={"./contactUs"}>
-						<Phone />
-					</Link>
-					<Text style={{ fontWeight: "bold" }}>Contact us</Text>
-				</View>
-
-				<View
-					style={{
-						flexDirection: "row",
-						gap: 10,
-						width: 270,
-						padding: 10,
-						borderColor: "#212529",
-						borderBottomWidth: 2,
-						marginBottom: 18,
-					}}
-				>
-					<Link href={"./privacyPolicy"}>
-						<Privacy />
-					</Link>
-					<Text style={{ fontWeight: "bold" }}>Privacy policy</Text>
-				</View>
-
-				<View
-					style={{
-						flexDirection: "row",
-						gap: 10,
-						width: 270,
-						padding: 10,
-						borderColor: "#212529",
-						borderBottomWidth: 2,
-						marginBottom: 18,
-					}}
-				>
-					<Link href={"./termsAndConditions"}>
-						<Term />
-					</Link>
-					<Text style={{ fontWeight: "bold" }}>Terms and Conditions</Text>
-				</View>
-
-				<View
-					style={{
-						flexDirection: "row",
-						gap: 10,
-						width: 270,
-						padding: 10,
-						borderColor: "#212529",
-						borderBottomWidth: 2,
-						marginBottom: 18,
-					}}
-				>
-					<Link href={"./logOut"}>
-						<Logout />
-					</Link>
-					<Text style={{ fontWeight: "bold" }}>logout</Text>
-				</View>
-			</View>
-
-			<View style={{ flex: 1, justifyContent: "flex-end" }}>
-				<View
-					style={{
-						backgroundColor: "#518379",
-						flexDirection: "row",
-						justifyContent: "space-evenly",
-						alignItems: "center",
-						height: 50,
-						margin: 10,
-						borderRadius: 20,
-					}}
-				>
-					<Link href={"./Home"}>
-						<Homee />
-					</Link>
-					<Link href={"./likes"}>
-						<WhiteHeart />
-					</Link>
-					<Link href={"./cart"}>
-						<Shopping />
-					</Link>
-					<Avatar />
-				</View>
-			</View>
-		</>
+		</ScrollView>
+		<View>
+			{/* navigator */}
+			<Navigator style={styles.navigator} setNavigate={setNavigate} navigate={navigate}/>
+		</View>
+	</>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: "center",
+		marginBottom: 20,
+	},
+	image: {
+		width: 200,
+		height: 200,
+		borderRadius: 100,
+		marginTop: 50,
+	},
+	editButton: {
+		position: "absolute",
+		top: 220,
+	},
+	customerName: {
+		fontSize: 30,
+		marginTop: 40,
+	},
+	modeIcon: {
+		marginVertical: 20,
+	},
+	ButtonsNavigators: {
+		borderBottomColor: 'black',
+		borderBottomWidth: 2,
+		paddingBottom: 10,
+		flex: 1,
+		flexDirection: "row",
+		gap: 10,
+		fontWeight: "bold",
+		width: Dimensions.get("window").width - 20,
+		marginTop: 20,
+	}
+});
+
 

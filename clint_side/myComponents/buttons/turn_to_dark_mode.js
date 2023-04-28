@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
-function SvgComponent(props) {
+function TurnToDarkMode(props) {
 	return (
 		<Svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -19,4 +19,4 @@ function SvgComponent(props) {
 	);
 }
 
-export default SvgComponent;
+export default TurnToDarkMode;

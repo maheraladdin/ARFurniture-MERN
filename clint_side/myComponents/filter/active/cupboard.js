@@ -1,6 +1,6 @@
 import Svg, { G, Rect, Path } from "react-native-svg";
 
-function Cupboard(props) {
+function CupboardActive(props) {
 	return (
 		<Svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -85,4 +85,4 @@ function Cupboard(props) {
 	);
 }
 
-export default Cupboard;
+export default CupboardActive;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { G, Rect, Text, TSpan, Path } from "react-native-svg";
 
-function SvgComponent(props) {
+function LoginGoogle(props) {
 	return (
 		<Svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -46,4 +46,4 @@ function SvgComponent(props) {
 	);
 }
 
-export default SvgComponent;
+export default LoginGoogle;

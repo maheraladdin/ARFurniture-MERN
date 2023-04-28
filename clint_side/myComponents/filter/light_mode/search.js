@@ -1,6 +1,6 @@
 import Svg, { Path } from "react-native-svg";
 
-function Search(props) {
+function SearchLightMode(props) {
 	return (
 		<Svg
 			data-name="Component 9 \u2013 1"
@@ -19,4 +19,4 @@ function Search(props) {
 	);
 }
 
-export default Search;
+export default SearchLightMode;

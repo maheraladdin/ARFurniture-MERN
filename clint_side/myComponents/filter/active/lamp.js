@@ -1,6 +1,6 @@
 import Svg, { G, Rect, Path } from "react-native-svg";
 
-function Lamp(props) {
+function LampActive(props) {
 	return (
 		<Svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -44,4 +44,4 @@ function Lamp(props) {
 	);
 }
 
-export default Lamp;
+export default LampActive;

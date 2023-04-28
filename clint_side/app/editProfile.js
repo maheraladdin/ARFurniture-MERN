@@ -1,96 +1,102 @@
-import { StyleSheet, View, Text, TextInput } from "react-native";
-import ProfileAvatar from "../myComponents/profile/profile_avatar_photo";
-import PutButton from "../myComponents/buttons/put_image";
+import {StyleSheet, View, TextInput, ScrollView, Image, TouchableOpacity,Dimensions,KeyboardAvoidingView} from "react-native";
+import ChangePhoto from "../myComponents/buttons/put_image";
 import Back from "../myComponents/buttons/back_button_light_mode";
 import Confirm from "../myComponents/buttons/confirm_button";
-import { Link } from "expo-router";
+import {useRouter} from "expo-router";
+import {useState} from "react";
 
-export default function profile() {
+export default function editProfile() {
+
+	const router = useRouter();
+
+	// username
+	const [username, setUsername] = useState("");
+
+	// email
+	const [email, setEmail] = useState("");
+
+	// phone number
+	const [phoneNumber, setPhoneNumber] = useState("");
+
+	const confirmHandler = () => {
+		router.push("./profile");
+	}
+
 	return (
-		<>
-			<View style={{ marginTop: 40 }}>
-				<View style={{ margin: 20, flexDirection: "row", gap: 10 }}>
-					<Link href={"./profile"}>
-						<Back />
-					</Link>
-					<Text style={{ fontSize: 20 }}>Profile</Text>
-				</View>
+		<KeyboardAvoidingView
+			behavior={"padding"}
+		>
+		<ScrollView>
+				<Back activity={"Profile"}/>
+				<View style={styles.container}>
+					<Image
+						source={{uri: "https://via.placeholder.com/200x200"}}
+						style={styles.image}
+					/>
+					<TouchableOpacity style={styles.ChangePhoto}>
+						<ChangePhoto />
+					</TouchableOpacity>
 
-				<View style={{ alignItems: "center", marginTop: 30 }}>
-					<ProfileAvatar />
-				</View>
-				<View style={{ alignItems: "center", marginTop: -25 }}>
-					<PutButton />
-				</View>
-
-				<View style={{ marginTop: 60 }}>
-					<View
-						style={{
-							alignItems: "center",
-							justifyContent: "center",
-						}}
-					>
+					<View style={styles.inputContainer}>
 						<TextInput
-							style={{
-								width: 300,
-								height: 50,
-								borderRadius: 30,
-								borderColor: "#212529",
-								borderWidth: 2,
-								paddingLeft: 30,
-							}}
-							placeholder="Username"
-						></TextInput>
+							style={styles.input}
+							placeholder={"User name"}
+							placeholderTextColor={"#CCC"}
+							onChangeText={setUsername}
+						/>
+						<TextInput
+							style={styles.input}
+							placeholder={"Email"}
+							placeholderTextColor={"#CCC"}
+							onChangeText={setEmail}
+						/>
+						<TextInput
+							style={styles.input}
+							placeholder={"Phone number"}
+							placeholderTextColor={"#CCC"}
+							onChangeText={setPhoneNumber}
+						/>
 					</View>
 
-					<View
-						style={{
-							alignItems: "center",
-							justifyContent: "center",
-							marginTop: 20,
-						}}
-					>
-						<TextInput
-							style={{
-								width: 300,
-								height: 50,
-								borderRadius: 30,
-								borderColor: "#212529",
-								borderWidth: 2,
-								paddingLeft: 30,
-							}}
-							placeholder="Example@gmail.com"
-						></TextInput>
-					</View>
-
-					<View
-						style={{
-							alignItems: "center",
-							justifyContent: "center",
-							marginTop: 20,
-						}}
-					>
-						<TextInput
-							style={{
-								width: 300,
-								height: 50,
-								borderRadius: 30,
-								borderColor: "#212529",
-								borderWidth: 2,
-								paddingLeft: 30,
-							}}
-							placeholder="Phone number"
-						></TextInput>
-					</View>
-				</View>
-
-				<View style={{ alignItems: "center", marginTop: 60 }}>
-					<Link href={"./profile"}>
+					<TouchableOpacity onPress={confirmHandler} style={styles.confirmButton}>
 						<Confirm />
-					</Link>
+					</TouchableOpacity>
 				</View>
-			</View>
-		</>
+		</ScrollView>
+		</KeyboardAvoidingView>
 	);
 }
+
+const styles = StyleSheet.create({
+	image: {
+		width: 200,
+		height: 200,
+		borderRadius: 100,
+		marginTop: 50,
+	},
+	ChangePhoto: {
+		position: "absolute",
+		top: 220,
+	},
+	container: {
+		flex: 1,
+		alignItems: "center",
+		marginBottom: 20,
+	},
+	confirmButton: {
+		marginVertical: 30,
+	},
+	input : {
+		width: Dimensions.get("window").width - 20,
+		height: 50,
+		borderStyle: "solid",
+		borderWidth: 1,
+		borderRadius: 25,
+		padding: 25,
+		marginBottom: 25,
+	},
+	inputContainer : {
+		marginTop: 40,
+	}
+});
 
