@@ -1,10 +1,13 @@
-import {isLogin} from "../../data/isLogin";
-import domain from "../../data/domain";
+import {isLogin} from "../../../data/isLogin";
+import domain from "../../../data/domain";
 import axios from "axios";
-// sign in user
-const LoginUser = (email, password) => {
+
+// register user
+const signUpUser = (username,email, password) => {
+
     (async () => {
-        return await axios.post(`${domain}/api/Users/login`, {
+        return await axios.post(`${domain}/api/Users/signup`, {
+            username,
             email,
             password
         })
@@ -16,6 +19,7 @@ const LoginUser = (email, password) => {
             })
             .catch(err => console.log(err));
     })();
-}
 
-export default LoginUser;
+};
+
+export default signUpUser;

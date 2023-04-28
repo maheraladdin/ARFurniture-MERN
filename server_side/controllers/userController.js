@@ -30,6 +30,7 @@ module.exports.signUp = asyncFunc(async (req,res) => {
     // get user data
 
     const userData = await User.find({email: req.body.email});
+    userData.password = undefined;
 
     // if valid then generate token
     const token = user.generateAuthToken();
@@ -63,8 +64,11 @@ module.exports.login = asyncFunc(async (req, res) => {
 
     // get user data
     const userData = await User.find({email: req.body.email});
+    userData.password = undefined;
 
     // send response
+    console.log("login successful");
+    console.log("userData: ",userData);
     res.header("x-auth-token", token).status(200).send({
         message: "login successful",
         isLogin: true,
@@ -75,7 +79,7 @@ module.exports.login = asyncFunc(async (req, res) => {
 
 // update user data
 module.exports.updateUser = asyncFunc(async (req,res) => {
-    const user = await User.findOneAndUpdate(req.params.id, req.body);
+    const user = await User.findByIdAndUpdate(req.params.id, req.body);
     if (user == null)
         res.status(404).json({ message: "Cannot find student" });
     else

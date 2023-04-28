@@ -8,7 +8,7 @@ import PrivacyPolicyIcon from "../myComponents/profile/light_mode/privacy_policy
 import TermsAndConditions from "../myComponents/profile/light_mode/Terms_and_Conditions";
 import Logout from "../myComponents/profile/light_mode/logout";
 import {useRouter} from "expo-router";
-import { signOutUser } from "../logic/Queries/signOutUser";
+import { signOutUser } from "../logic/Queries/user/signOutUser";
 import { isLogin } from "../data/isLogin";
 
 export default function profile() {

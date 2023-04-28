@@ -4,10 +4,18 @@ import Back from "../myComponents/buttons/back_button_light_mode";
 import Confirm from "../myComponents/buttons/confirm_button";
 import {useRouter} from "expo-router";
 import {useState} from "react";
+import * as ImagePicker from 'expo-image-picker';
+import updateUser from "../logic/Queries/user/updateUser";
+import {isLogin} from "../data/isLogin";
 
 export default function editProfile() {
 
+	// router
 	const router = useRouter();
+
+	// image
+	const [image, setImage] = useState(isLogin.userData.image || "https://via.placeholder.com/200x200");
+
 
 	// username
 	const [username, setUsername] = useState("");
@@ -15,12 +23,34 @@ export default function editProfile() {
 	// email
 	const [email, setEmail] = useState("");
 
-	// phone number
-	const [phoneNumber, setPhoneNumber] = useState("");
+	// password
+	const [password, setPassword] = useState("");
 
 	const confirmHandler = () => {
+		updateUser(username,email,password,image);
 		router.push("./profile");
 	}
+
+	const pickImage = async () => {
+		// result store the chosen image from gallery
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			allowsEditing: Platform.OS === "android" && true,
+			quality: 1,
+			base64: true,
+		});
+
+		// in case choosing image process 's not canceled
+		if (!result.canceled) {
+			// return javascript code form the class diagram image
+			setImage('data:image/jpeg;base64,' + result.assets[0].base64);
+		}
+	};
+
+
+
+
+
 
 	return (
 		<KeyboardAvoidingView
@@ -30,17 +60,17 @@ export default function editProfile() {
 				<Back activity={"Profile"}/>
 				<View style={styles.container}>
 					<Image
-						source={{uri: "https://via.placeholder.com/200x200"}}
+						source={{uri: image}}
 						style={styles.image}
 					/>
-					<TouchableOpacity style={styles.ChangePhoto}>
+					<TouchableOpacity onPress={pickImage} style={styles.ChangePhoto}>
 						<ChangePhoto />
 					</TouchableOpacity>
 
 					<View style={styles.inputContainer}>
 						<TextInput
 							style={styles.input}
-							placeholder={"User name"}
+							placeholder={"Username"}
 							placeholderTextColor={"#CCC"}
 							onChangeText={setUsername}
 						/>
@@ -52,9 +82,9 @@ export default function editProfile() {
 						/>
 						<TextInput
 							style={styles.input}
-							placeholder={"Phone number"}
+							placeholder={"Password"}
 							placeholderTextColor={"#CCC"}
-							onChangeText={setPhoneNumber}
+							onChangeText={setPassword}
 						/>
 					</View>
 
@@ -92,7 +122,7 @@ const styles = StyleSheet.create({
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderRadius: 25,
-		padding: 25,
+		paddingLeft: 25,
 		marginBottom: 25,
 	},
 	inputContainer : {

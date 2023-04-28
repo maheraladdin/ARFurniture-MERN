@@ -7,6 +7,9 @@ const corsMW = require("./middlewares/corsMW");
 // last module to handle errors
 const errorMW = require("./middlewares/errorMW");
 
+// require dotenv
+require("dotenv").config();
+
 // require Routes
 const productsRouter = require("./routes/products");
 const userRouter = require("./routes/user");
