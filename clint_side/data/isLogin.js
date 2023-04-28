@@ -4,7 +4,7 @@ export const isLogin = {
     },
     state: false,
     token: "",
-    set changeUid(uid) {
+    set changeToken(uid) {
         this.token = uid;
     },
     userData: {},

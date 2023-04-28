@@ -13,16 +13,17 @@ module.exports.signUp = asyncFunc(async (req,res) => {
     // if not registered then register the user
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
-    const user = await new User({
-        name: req.body.name,
+
+    const userData = {
+        name: req.body.username,
         email: req.body.email,
         password: hash,
         image: "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
         wishlist: [],
         cart: [],
-    });
+    }
 
-    console.log(user);
+    const user = await new User(userData);
 
     await user.save();
 
@@ -33,7 +34,11 @@ module.exports.signUp = asyncFunc(async (req,res) => {
     res.header("x-auth-token", token);
 
     // send response
-    res.status(200).send({message: "user registered successfully" , isRegistered: false , isLogin: true});
+    res.status(200).send({
+        message: "user registered successfully"
+        ,isRegistered: false
+        ,isLogin: true
+        ,userData});
 });
 
 // login
@@ -47,11 +52,20 @@ module.exports.login = asyncFunc(async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword) return res.status(400).send({message: "Invalid email or password", isLogin: false});
 
+    // get user data
+    const userData = await User.findOne({email: req.body.email});
+
     // if valid then generate token
     const token = user.generateAuthToken();
 
     // send response
-    res.header("x-auth-token", token).status(200).send({message: "login successful", isLogin: true, id: user._id});
+    res.header("x-auth-token", token)
+        .status(200)
+        .send({
+            message: "login successful",
+            isLogin: true,
+            userData
+        });
 });
 
 // update user data
