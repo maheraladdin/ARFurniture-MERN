@@ -11,9 +11,10 @@ import {
 import Back from "../myComponents/buttons/back_button_light_mode";
 import {useState} from "react";
 import ConBtn from "../myComponents/buttons/continue_button";
-import registerUser from "../logic/Queries/reguistUser";
+import signUpUser from "../logic/Queries/reguistUser";
 import {passwordValidator} from "../logic/validator/passwordValidator";
 import {emailValidator} from "../logic/validator/emailValidator";
+import {isLogin} from "../data/isLogin";
 
 export default function Signup() {
 
@@ -57,10 +58,8 @@ export default function Signup() {
 			setConfirmPasswordInvalid(false);
 		}
 		if(emailInvalid && passwordInvalid && confirmPasswordInvalid) {
-			setActivity("home");
-			registerUser(username, email, password);
-		} else {
-			setBorderColorValidation("red");
+			signUpUser(username, email, password);
+			isLogin.state ? setActivity("home") : setBorderColorValidation("red");
 		}
 	}
 

@@ -16,7 +16,7 @@ import LoginFace from "../myComponents/buttons/login_with_facebook_button";
 import LoginGoogle from "../myComponents/buttons/login_with_google";
 import SignUp from "../myComponents/buttons/sign_up_button";
 import {useRouter} from "expo-router";
-import {signInUser} from "../logic/Queries/signInUser";
+import LoginUser from "../logic/Queries/signInUser";
 import {passwordValidator} from "../logic/validator/passwordValidator";
 import {emailValidator} from "../logic/validator/emailValidator";
 
@@ -48,7 +48,7 @@ export default function login() {
 			setPasswordInvalid(false);
 
 		if(emailInvalid && passwordInvalid)
-			signInUser(email, password);
+			LoginUser(email, password);
 	}
 
 	return (

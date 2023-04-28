@@ -1,8 +1,8 @@
 import {isLogin} from "../../data/isLogin";
 import domain from "../../data/domain";
 // sign in user
-export const signInUser = (email, password) => {
-fetch(`${domain}/api/users/signin`,{
+const LoginUser = (email, password) => {
+fetch(`${domain}/api/Users/login`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -22,3 +22,5 @@ fetch(`${domain}/api/users/signin`,{
         })
         .catch(err => console.log(err));
 }
+
+export default LoginUser;

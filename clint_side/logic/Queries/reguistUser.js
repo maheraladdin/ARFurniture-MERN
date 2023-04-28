@@ -3,11 +3,8 @@ import domain from "../../data/domain";
 
 // register user
 const signUpUser = (username,email, password) => {
-    fetch(`${domain}/api/users/signup`,{
+    fetch(`${domain}/api/Users/signup`,{
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
         body: JSON.stringify({
           username,
           email,
@@ -19,6 +16,7 @@ const signUpUser = (username,email, password) => {
             return res.json()
         })
         .then(data => {
+            console.log(data);
             isLogin.changeState = data.isLogin;
             isLogin.changeUserData = data.userData;
         })
