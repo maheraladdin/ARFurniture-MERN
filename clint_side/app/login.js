@@ -35,15 +35,13 @@ export default function login() {
 	// password invalid
 	const [passwordInvalid, setPasswordInvalid] = useState(true);
 
-	// activity
-	const [activity, setActivity] = useState(null);
 
 	// borderColorValidation
 	const [borderColorValidation, setBorderColorValidation] = useState("#CCC");
 
 	const router = useRouter();
 
-	// login
+	// login user
 	const login = () => {
 
 		// validate email
@@ -56,7 +54,6 @@ export default function login() {
 
 		if(emailInvalid && passwordInvalid) {
 			LoginUser(email, password);
-			isLogin.state ? setActivity("home") : setBorderColorValidation("red");
 		}
 	}
 
@@ -99,7 +96,7 @@ export default function login() {
 					<TouchableOpacity>
 						<LoginGoogle />
 					</TouchableOpacity>
-					<ConBtn callback={login} activity={activity}/>
+					<ConBtn callback={login} activity={"home"}/>
 					<TouchableOpacity onPress={() => router.push("signUp")}>
 						<SignUp />
 					</TouchableOpacity>

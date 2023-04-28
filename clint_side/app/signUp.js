@@ -39,9 +39,6 @@ export default function Signup() {
 	// confirm password invalid
 	const [confirmPasswordInvalid, setConfirmPasswordInvalid] = useState(true);
 
-	// activity
-	const [activity, setActivity] = useState(null);
-
 	// borderColorValidation
 	const [borderColorValidation, setBorderColorValidation] = useState("#CCC");
 
@@ -59,7 +56,6 @@ export default function Signup() {
 		}
 		if(emailInvalid && passwordInvalid && confirmPasswordInvalid) {
 			signUpUser(username, email, password);
-			isLogin.state ? setActivity("home") : setBorderColorValidation("red");
 		}
 	}
 
@@ -114,7 +110,7 @@ export default function Signup() {
 						onChangeText={setConfirmPassword}
 						secureTextEntry={true}
 					/>
-					<ConBtn callback={register} activity={activity}/>
+					<ConBtn callback={register} activity={"home"}/>
 				</View>
 
 			</ScrollView>

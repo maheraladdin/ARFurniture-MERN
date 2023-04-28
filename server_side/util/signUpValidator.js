@@ -4,7 +4,7 @@ const ajv = new Ajv();
 const signUpSchema = {
     type: "object",
     properties: {
-        name: {
+        username: {
             type: "string"
         },
         email: {
@@ -14,7 +14,7 @@ const signUpSchema = {
             type: "string"
         }
     },
-    required: ["name", "email", "password"]
+    required: ["username", "email", "password"]
 }
 
 module.exports = ajv.compile(signUpSchema);

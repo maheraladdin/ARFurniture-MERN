@@ -1,21 +1,27 @@
 import {passwordValidator} from "../logic/validator/passwordValidator";
 
-test("Valid Password", () => {
-    expect(passwordValidator("P@ssw0rd123")).toBe(true);
-});
+// test cases
 
-test("Invalid Password (Too Short)", () => {
-    expect(passwordValidator("pass")).toBe(false);
-});
+describe("Password Validator", () => {
 
-test("Invalid Password (No Uppercase)", () => {
-    expect(passwordValidator("password@123")).toBe(false);
-});
+    it("Valid Password", () => {
+        expect(passwordValidator("P@ssw0rd123")).toBe(true);
+    });
 
-test("Invalid Password (No Lowercase)", () => {
-    expect(passwordValidator("PASSWORD@123")).toBe(false);
-});
+    it("Invalid Password (Too Short)", () => {
+        expect(passwordValidator("pass")).toBe(false);
+    });
 
-test("Invalid Password (No Number)", () => {
-    expect(passwordValidator("Password")).toBe(false);
+    it("Invalid Password (No Uppercase)", () => {
+        expect(passwordValidator("password@123")).toBe(false);
+    });
+
+    it("Invalid Password (No Lowercase)", () => {
+        expect(passwordValidator("PASSWORD@123")).toBe(false);
+    });
+
+    it("Invalid Password (No Number)", () => {
+        expect(passwordValidator("Password")).toBe(false);
+    });
+
 });

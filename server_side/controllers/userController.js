@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 // sign up
 module.exports.signUp = asyncFunc(async (req,res) => {
 
+    console.log(req.body)
     // check if the user is already registered
     const isRegistered = await User.findOne({email: req.body.email}).exec();
     if (isRegistered)
@@ -13,19 +14,22 @@ module.exports.signUp = asyncFunc(async (req,res) => {
     // if not registered then register the user
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
-
-    const userData = {
-        name: req.body.username,
+    const user = await new User({
+        username: req.body.username,
         email: req.body.email,
         password: hash,
-        image: "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png",
+        image: "",
         wishlist: [],
         cart: [],
-    }
+    });
 
-    const user = await new User(userData);
+    // save user
 
     await user.save();
+
+    // get user data
+
+    const userData = await User.find({email: req.body.email});
 
     // if valid then generate token
     const token = user.generateAuthToken();
@@ -35,10 +39,12 @@ module.exports.signUp = asyncFunc(async (req,res) => {
 
     // send response
     res.status(200).send({
-        message: "user registered successfully"
-        ,isRegistered: false
-        ,isLogin: true
-        ,userData});
+        message: "user registered successfully",
+        isRegistered: false,
+        isLogin: true,
+        token,
+        userData
+    });
 });
 
 // login
@@ -52,20 +58,19 @@ module.exports.login = asyncFunc(async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword) return res.status(400).send({message: "Invalid email or password", isLogin: false});
 
-    // get user data
-    const userData = await User.findOne({email: req.body.email});
-
     // if valid then generate token
     const token = user.generateAuthToken();
 
+    // get user data
+    const userData = await User.find({email: req.body.email});
+
     // send response
-    res.header("x-auth-token", token)
-        .status(200)
-        .send({
-            message: "login successful",
-            isLogin: true,
-            userData
-        });
+    res.header("x-auth-token", token).status(200).send({
+        message: "login successful",
+        isLogin: true,
+        token,
+        userData
+    });
 });
 
 // update user data

@@ -19,14 +19,14 @@ const loginValidatorMW = require("../middlewares/loginValidatorMW");
 const signUpValidatorMW = require("../middlewares/signUpValidatorMW");
 
 // @route POST api/users/signup
-// @desc Register user
+// @desc Register user and return JWT token
 // @access Public
-router.post("/signup",signUpValidatorMW, signUp);
+router.post("/signup", signUp);
 
 // @route POST api/users/login
 // @desc Login user and return JWT token
 // @access Public
-router.post("/login",loginValidatorMW, login);
+router.post("/login", login);
 
 // @route PUT api/users/:id
 // @desc Update user data
